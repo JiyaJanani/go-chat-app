@@ -1,9 +1,8 @@
 package main
 
 import (
+	"Z:\go\chat-app\lib\main.go"
 	"flag"
-	"log"
-	"net"
 	"os"
 )
 
@@ -16,30 +15,10 @@ func main() {
 		// go run main.go -listen <ip>
 		//index 0 is having the name of the program 1 is teh listen flag 2 is the ip
 		connIP := os.Args[2]
-		runHost(connIP)
+		lib.RunHost(connIP)
 	} else {
 		// go run main.go <ip>
 		connIP := os.Args[1]
-		runGuest(connIP)
+		lib.RunGuest(connIP)
 	}
-}
-
-const port = "8080"
-
-func runHost(ip string) {
-	ipAndPort := ip + ":" + port
-	listener, listenErr := net.Listen("tcp", ipAndPort)
-	if listenErr != nil {
-		log.Fatal("error:", listenErr)
-	}
-
-	conn, acceptErr := listener.Accept()
-	if acceptErr != nil {
-		log.Fatal("error:", acceptErr)
-	}
-
-}
-
-func runGuest(ip string) {
-
 }
